@@ -63,7 +63,7 @@ module.exports = {
 
   addModelDependencies: function addModelDependencies(models, resource) {
     Object.keys(models).forEach(contentType => {
-      if(!models[contentType].startsWith('$')) {
+      if(this.cfTemplate.Resources[`${models[contentType]}Model`]) {
         resource.DependsOn.add(`${models[contentType]}Model`);
       }
     });
@@ -95,13 +95,10 @@ module.exports = {
 
           resource.Properties.MethodResponses.push(_response);
         }
-
+        console.log(this);
         if (response.responseModels) {
           _response.ResponseModels = response.responseModels;
           this.addModelDependencies(_response.ResponseModels, resource);
-          Object.keys(_response.ResponseModels).forEach(function(contentType) {
-            _response.ResponseModels[contentType] = _response.ResponseModels[contentType].replace('$','');
-          });
         }
       });
     }
