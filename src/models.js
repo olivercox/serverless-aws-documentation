@@ -63,8 +63,8 @@ module.exports = {
 
   addModelDependencies: function addModelDependencies(models, resource) {
     Object.keys(models).forEach(contentType => {
-      if(!models[contentType].startsWith('https://')) {
-        resource.DependsOn.add(`${models[contentType]}`);
+      if(!models[contentType].startsWith('$')) {
+        resource.DependsOn.add(`${models[contentType]}Model`);
       }
     });
   },
@@ -113,5 +113,4 @@ module.exports = {
       resource.Properties.RequestModels = documentation.requestModels;
     }
   }
-
 };
