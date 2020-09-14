@@ -99,6 +99,9 @@ module.exports = {
         if (response.responseModels) {
           _response.ResponseModels = response.responseModels;
           this.addModelDependencies(_response.ResponseModels, resource);
+          Object.keys(_response.ResponseModels).forEach(function(contentType) {
+            _response.ResponseModels[contentType] = _response.ResponseModels[contentType].replace('$','');
+          });
         }
       });
     }
