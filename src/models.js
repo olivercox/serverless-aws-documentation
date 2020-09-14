@@ -63,7 +63,9 @@ module.exports = {
 
   addModelDependencies: function addModelDependencies(models, resource) {
     Object.keys(models).forEach(contentType => {
-      resource.DependsOn.add(`${models[contentType]}Model`);
+      if(!models[contentType].startsWith('https://')) {
+        resource.DependsOn.add(`${models[contentType]}`);
+      }
     });
   },
 
