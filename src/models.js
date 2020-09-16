@@ -95,7 +95,6 @@ module.exports = {
 
           resource.Properties.MethodResponses.push(_response);
         }
-        console.log(this);
         if (response.responseModels) {
           _response.ResponseModels = response.responseModels;
           this.addModelDependencies(_response.ResponseModels, resource);
