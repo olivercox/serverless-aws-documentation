@@ -47,6 +47,9 @@ class ServerlessAWSDocumentation {
                 extensions: {
                     required: false,
                 },
+                documentationFilter: {
+                  required: false
+                }
             },
         }
     };
