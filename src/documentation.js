@@ -116,8 +116,10 @@ module.exports = function() {
             limit: 9999,
           })
         )
-        .then(results => results.items.map(
-          part => aws.request('APIGateway', 'deleteDocumentationPart', {
+        .then(results => results.filter(part => {
+            return !this.options.documentationFilter || part.path.toLocaleLowerCase().includes(this.options.documentationFilter.toLocaleLowerCase())
+          }).items.map(
+            part => aws.request('APIGateway', 'deleteDocumentationPart', {
             documentationPartId: part.id,
             restApiId: this.restApiId,
           })
