@@ -117,7 +117,19 @@ module.exports = function() {
           })
         )
         .then(results => results.items.filter(part => {
-            return !this.options.documentationFilter || part.path.toLocaleLowerCase().includes(this.options.documentationFilter.toLocaleLowerCase())
+            if (!this.options.documentationFilter) {
+              return false;
+            }
+
+            if (part.path && part.path.toLocaleLowerCase().includes(this.options.documentationFilter.toLocaleLowerCase())) {
+              return true;
+            }
+
+            if (part.type && part.type.toLocaleUpperCase() === 'MODEL' && this.customVars.documentation.models.find(m => m.name === part.name)) {
+              return true;
+            }
+
+            return false;
           }).map(
             part => aws.request('APIGateway', 'deleteDocumentationPart', {
             documentationPartId: part.id,
