@@ -121,11 +121,12 @@ module.exports = function() {
               return false;
             }
 
-            if (part.path && part.path.toLocaleLowerCase().includes(this.options.documentationFilter.toLocaleLowerCase())) {
+            if (part.location && part.location.path && part.location.path.toLocaleLowerCase().includes(this.options.documentationFilter.toLocaleLowerCase())) {
               return true;
             }
 
-            if (part.type && part.type.toLocaleUpperCase() === 'MODEL' && this.customVars.documentation.models.find(m => m.name === part.name)) {
+            if (part.location && part.location.type && part.location.type.toLocaleUpperCase() === 'MODEL' 
+                && this.customVars.documentation.models.find(m => m.name === part.location.name)) {
               return true;
             }
 
