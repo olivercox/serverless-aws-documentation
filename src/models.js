@@ -11,7 +11,7 @@ function replaceModelRefs(restApiId, cfModel) {
         let match;
         if (
           (match = /{{model:\s*([\-\w]+)}}/.exec(obj[key])) ||
-          (match = /#\/definitions\/\s*([\-\w]+)}}/.exec(obj[key]))
+          (match = /#\/definitions\/\s*([\-\w]+)/.exec(obj[key]))
         ) {
           obj[key] = {
             'Fn::Join': [
