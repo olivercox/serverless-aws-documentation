@@ -123,11 +123,11 @@ module.exports = function() {
 
             const documentationFilters = this.options.documentationFilter.split(',');
 
-            documentationFilters.forEach(filter => {
+            for(let filter of documentationFilters) {
               if (part.location && part.location.path && part.location.path.toLocaleLowerCase().includes(filter.toLocaleLowerCase())) {
                 return true;
               }
-            });
+            };
 
             if (part.location && part.location.type && part.location.type.toLocaleUpperCase() === 'MODEL' 
                 && this.customVars.documentation.models.find(m => m.name === part.location.name)) {
